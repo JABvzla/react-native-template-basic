@@ -18,6 +18,12 @@ const versionNumber = parseInt(versionString.replace(/\./g, ''));
 
 console.log(EMPTY_LINE);
 
+// Get args
+console.log('Args are:');
+process.argv.forEach(function (val, index, array) {
+  console.log(index + ': ' + val);
+});
+
 if (versionNumber >= 570) {
   console.log('🛠  Fix React-Native@0.57.x installation...');
   console.log('⚙️  Cleaning React Native cache...', );

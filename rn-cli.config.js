@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const { execSync } = require('child_process');
-
+const template = require('./src/App/test.js');
 const EMPTY_LINE = '';
 const deleteFile = filename => {
   try {
@@ -18,11 +18,31 @@ const versionNumber = parseInt(versionString.replace(/\./g, ''));
 
 console.log(EMPTY_LINE);
 
-// Get args
-console.log('Args are:');
+console.log('📖 Selected Options:');
+
+let cfg = { flow: false };
+
 process.argv.forEach(function (val, index, array) {
   console.log(index + ': ' + val);
+  switch(val) {
+    case '--flow':
+      console.log('[x] flow');
+      cfg = { flow: true };
+    default:
+    break;
+  }
 });
+
+let data = fs.readFileSync("src/app/test.js","utf8");
+
+const filePath = `${__dirname}/prueba.js`;
+
+console.log('filePath:' , filePath);
+fs.writeFile(filePath, template(cfg), err => {
+  if (err) throw err;
+  console.log("✅ Created file: ", filePath);
+});
+
 
 if (versionNumber >= 570) {
   console.log('🛠  Fix React-Native@0.57.x installation...');

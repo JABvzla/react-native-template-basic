@@ -1,7 +1,7 @@
-`
+const template = (cfg) => `
 /**
  * @format
- * ${cfg.flow? '@flow' : null}
+ * ${cfg.flow? '@flow'  : ''}
  */
 
 import React from 'react';
@@ -56,4 +56,6 @@ const App = () => (
 );
 
 export default App;
-`
+`;
+
+module.exports = template;
